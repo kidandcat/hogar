@@ -1,0 +1,53 @@
+{{template "layout.html" .}}
+
+{{define "title"}}Menú semanal{{end}}
+
+{{define "content"}}
+<section class="dashboard">
+  <h1 class="page-title">Menú semanal</h1>
+
+  {{if .Menu}}
+  <div class="week-menu">
+    {{range .Menu.Days}}
+    <div class="card day-card">
+      <h2 class="day-card-header">{{.DayName}}</h2>
+
+      <div class="meal">
+        <span class="meal-label">Comida</span>
+        <div class="meal-info">
+          {{if .LunchRecipeID}}
+          <a href="/recipes#recipe-{{.LunchRecipeID}}" class="meal-name meal-link">{{.Lunch}}</a>
+          {{else}}
+          <span class="meal-name">{{.Lunch}}</span>
+          {{end}}
+          {{if .LunchPrepTime}}
+          <span class="badge">{{.LunchPrepTime}}</span>
+          {{end}}
+        </div>
+      </div>
+
+      <div class="meal">
+        <span class="meal-label">Cena</span>
+        <div class="meal-info">
+          {{if .DinnerRecipeID}}
+          <a href="/recipes#recipe-{{.DinnerRecipeID}}" class="meal-name meal-link">{{.Dinner}}</a>
+          {{else}}
+          <span class="meal-name">{{.Dinner}}</span>
+          {{end}}
+          {{if .DinnerPrepTime}}
+          <span class="badge">{{.DinnerPrepTime}}</span>
+          {{end}}
+        </div>
+      </div>
+    </div>
+    {{end}}
+  </div>
+  {{else}}
+  <div class="empty-state">
+    <div class="empty-state-icon">🍽️</div>
+    <p class="empty-state-text">No hay menú para esta semana</p>
+    <p class="empty-state-hint">Crea un nuevo menú para empezar a planificar tus comidas.</p>
+  </div>
+  {{end}}
+</section>
+{{end}}

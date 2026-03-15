@@ -1,0 +1,67 @@
+{{template "layout.html" .}}
+
+{{define "title"}}Lista de la compra{{end}}
+
+{{define "content"}}
+<section class="shopping-page">
+  <div class="shopping-header">
+    <h1 class="page-title">Lista de la compra</h1>
+
+    {{if .Lists}}
+    <div class="list-selector">
+      <select id="list-select" class="form-select" aria-label="Seleccionar lista">
+        {{range .Lists}}
+        <option value="{{.ID}}" {{if .Active}}selected{{end}}>{{.Name}}</option>
+        {{end}}
+      </select>
+    </div>
+    {{end}}
+  </div>
+
+  {{if .ActiveList}}
+  <div class="progress-wrapper">
+    <div class="progress-bar" id="progress-bar">
+      <div class="progress-fill" id="progress-fill"></div>
+    </div>
+    <span class="progress-text" id="progress-text">0 / 0</span>
+  </div>
+
+  <div class="shopping-list" id="shopping-list" data-list-id="{{.ActiveList.ID}}">
+    {{range .ActiveList.Categories}}
+    <div class="category-group" data-category="{{.Name}}">
+      <h2 class="category-header">{{.Name}}</h2>
+
+      {{range .Items}}
+      <div
+        class="shopping-item {{if .Checked}}shopping-item--checked{{end}}"
+        data-item-id="{{.ID}}"
+        data-checked="{{.Checked}}"
+        role="checkbox"
+        aria-checked="{{.Checked}}"
+        tabindex="0"
+      >
+        <span class="shopping-item-check" aria-hidden="true">
+          {{if .Checked}}
+          <svg viewBox="0 0 24 24" class="icon-check"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+          {{else}}
+          <svg viewBox="0 0 24 24" class="icon-circle"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          {{end}}
+        </span>
+        <span class="shopping-item-name">{{.Name}}</span>
+        {{if .Quantity}}
+        <span class="shopping-item-qty">{{.Quantity}}</span>
+        {{end}}
+      </div>
+      {{end}}
+    </div>
+    {{end}}
+  </div>
+  {{else}}
+  <div class="empty-state">
+    <div class="empty-state-icon">🛒</div>
+    <p class="empty-state-text">No hay listas de la compra</p>
+    <p class="empty-state-hint">Crea una nueva lista para empezar.</p>
+  </div>
+  {{end}}
+</section>
+{{end}}

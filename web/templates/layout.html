@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#E07A5F">
+  <title>{{template "title" .}} - Hogar</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+  <script src="/static/js/app.js" defer></script>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-brand">Hogar</a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú">
+        <span class="hamburger"></span>
+      </button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="/" class="nav-link">Menú</a></li>
+        <li><a href="/shopping" class="nav-link">Compra</a></li>
+        <li><a href="/recipes" class="nav-link">Recetas</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="container">
+    {{template "content" .}}
+  </main>
+
+  <div class="toast" id="toast" aria-live="polite"></div>
+</body>
+</html>

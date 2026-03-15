@@ -1,0 +1,47 @@
+{{template "layout.html" .}}
+
+{{define "title"}}Menús{{end}}
+
+{{define "content"}}
+<section class="menus-page">
+  <h1 class="page-title">Menús</h1>
+
+  {{if .Menus}}
+  <div class="menus-list">
+    {{range .Menus}}
+    <div class="card menu-card" data-menu-expand>
+      <div class="menu-card-header">
+        <h2 class="menu-card-title">Semana del {{.WeekStart}}</h2>
+        <span class="menu-card-chevron" aria-hidden="true"></span>
+      </div>
+
+      <div class="menu-card-body" hidden>
+        {{range .Days}}
+        <div class="menu-day-row">
+          <span class="menu-day-name">{{.DayName}}</span>
+          <div class="menu-day-meals">
+            <div class="menu-day-meal">
+              <span class="meal-label-sm">Comida:</span>
+              <span>{{.Lunch}}</span>
+              {{if .LunchPrepTime}}<span class="badge badge-sm">{{.LunchPrepTime}}</span>{{end}}
+            </div>
+            <div class="menu-day-meal">
+              <span class="meal-label-sm">Cena:</span>
+              <span>{{.Dinner}}</span>
+              {{if .DinnerPrepTime}}<span class="badge badge-sm">{{.DinnerPrepTime}}</span>{{end}}
+            </div>
+          </div>
+        </div>
+        {{end}}
+      </div>
+    </div>
+    {{end}}
+  </div>
+  {{else}}
+  <div class="empty-state">
+    <div class="empty-state-icon">📋</div>
+    <p class="empty-state-text">No hay menús creados</p>
+  </div>
+  {{end}}
+</section>
+{{end}}
