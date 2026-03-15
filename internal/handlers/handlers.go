@@ -148,6 +148,7 @@ func (h *Handler) shoppingPage(w http.ResponseWriter, r *http.Request) {
 			}
 		}
 
+		data["SelectedID"] = selectedID
 		sl, _ := h.DB.GetShoppingList(selectedID)
 		if sl != nil {
 			categoryOrder := []string{"Carnes", "Lácteos", "Frutas/Verduras", "Congelados", "Despensa", "Limpieza", "Otros"}

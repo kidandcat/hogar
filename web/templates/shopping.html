@@ -11,7 +11,7 @@
     <div class="list-selector">
       <select id="list-select" class="form-select" aria-label="Seleccionar lista">
         {{range .Lists}}
-        <option value="{{.ID}}" {{if .Active}}selected{{end}}>{{.Name}}</option>
+        <option value="{{.ID}}" {{if eq .ID $.SelectedID}}selected{{end}}>{{.Name}}</option>
         {{end}}
       </select>
     </div>
@@ -48,9 +48,6 @@
           {{end}}
         </span>
         <span class="shopping-item-name">{{.Name}}</span>
-        {{if .Quantity}}
-        <span class="shopping-item-qty">{{.Quantity}}</span>
-        {{end}}
       </div>
       {{end}}
     </div>
